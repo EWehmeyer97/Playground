@@ -11,7 +11,7 @@ public class OceanSimulation : Singleton<OceanSimulation>
 
     void Start()
     {
-        sineWaves = new SineWave[waves.Length];
+        sineWaves = new SineWave[8];
         for(int i = 0; i < waves.Length; i++)
         {
             sineWaves[i].direction = waves[i].direction.normalized;
@@ -24,11 +24,27 @@ public class OceanSimulation : Singleton<OceanSimulation>
             ocean.SetFloat("_OceanAmplitude_" + i, sineWaves[i].amplitude);
             ocean.SetFloat("_OceanSpeed_" + i, sineWaves[i].phase);
         }
+        float freq = 2f / waves[0].waveLength;
+        float amp = waves[0].amplitude;
+        for (int i = waves.Length; i < sineWaves.Length; i++)
+        {
+            freq *= 1.18f;
+            amp *= 0.82f;
+            sineWaves[i].direction = Random.insideUnitCircle.normalized;
+            sineWaves[i].frequency = freq;
+            sineWaves[i].amplitude = amp;
+            sineWaves[i].phase = waves[0].speed * freq;
+
+            ocean.SetVector("_OceanDirection_" + i, sineWaves[i].direction);
+            ocean.SetFloat("_OceanFrequency_" + i, sineWaves[i].frequency);
+            ocean.SetFloat("_OceanAmplitude_" + i, sineWaves[i].amplitude);
+            ocean.SetFloat("_OceanSpeed_" + i, sineWaves[i].phase);
+        }
     }
 
     private void OnApplicationQuit()
     {
-        for (int i = 0; i < waves.Length; i++)
+        for (int i = 0; i < sineWaves.Length; i++)
             ocean.SetFloat("_OceanSpeed_" + i, 0);
     }
 
@@ -36,7 +52,7 @@ public class OceanSimulation : Singleton<OceanSimulation>
     {
         float height = 0;
 
-        for(int i = 0; i < sineWaves.Length; i++)
+        for(int i = 0; i < 4; i++)
             height += sineWaves[i].amplitude * Mathf.Sin(sineWaves[i].frequency * (sineWaves[i].direction.x * pos.x + sineWaves[i].direction.y * pos.z) + sineWaves[i].phase * Time.time);
         
         return height;

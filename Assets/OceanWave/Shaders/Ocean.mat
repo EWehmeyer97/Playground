@@ -64,7 +64,7 @@ Material:
     - _NormalStrength: 0.6
     - _OceanAmplitude_0: 0.1
     - _OceanAmplitude_1: 0.1
-    - _OceanFrequency_0: 1.3333334
+    - _OceanFrequency_0: 0.5
     - _OceanFrequency_1: 0.6666667
     - _OceanHeight: 0.25
     - _OceanHeight_0: 0.1
