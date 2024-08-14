@@ -593,10 +593,20 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5975754648535428461, guid: dc65605bdc0900e45b777b32ab9ef9a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: dc65605bdc0900e45b777b32ab9ef9a4,
         type: 3}
       propertyPath: m_Name
       value: coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869873546869171050, guid: dc65605bdc0900e45b777b32ab9ef9a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -633,13 +643,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922200547}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.047210272, y: -0.9511064, z: 0.18487626, w: 0.24287593}
+  m_LocalRotation: {x: 0.046520792, y: -0.9517191, z: 0.18284157, w: 0.24214803}
   m_LocalPosition: {x: 11.35, y: 11.45, z: 20.76}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1655776972}
-  m_LocalEulerAnglesHint: {x: 22, y: -151.35, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.75, y: -151.45, z: 0}
 --- !u!114 &922200549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,7 +727,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 300
-  field of view: 17
+  field of view: 12
   orthographic: 0
   orthographic size: 0.002399995
   m_Depth: 0
@@ -1433,7 +1443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44037f55761bde44f8506a900d046056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 60
+  speed: 80
 --- !u!1 &1695243213
 GameObject:
   m_ObjectHideFlags: 0

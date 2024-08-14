@@ -7,11 +7,14 @@ public class OceanSimulation : Singleton<OceanSimulation>
     public Material ocean;
     public OceanWave[] waves;
 
+    [SerializeField] private int waveCount = 8;
+    [SerializeField] private int simulateCount = 4;
+
     private SineWave[] sineWaves;
 
     void Start()
     {
-        sineWaves = new SineWave[8];
+        sineWaves = new SineWave[waveCount];
         for(int i = 0; i < waves.Length; i++)
         {
             sineWaves[i].direction = waves[i].direction.normalized;
@@ -24,9 +27,10 @@ public class OceanSimulation : Singleton<OceanSimulation>
             ocean.SetFloat("_OceanAmplitude_" + i, sineWaves[i].amplitude);
             ocean.SetFloat("_OceanSpeed_" + i, sineWaves[i].phase);
         }
+
         float freq = 2f / waves[0].waveLength;
         float amp = waves[0].amplitude;
-        for (int i = waves.Length; i < sineWaves.Length; i++)
+        for (int i = waves.Length; i < waveCount; i++)
         {
             freq *= 1.18f;
             amp *= 0.82f;
@@ -52,7 +56,7 @@ public class OceanSimulation : Singleton<OceanSimulation>
     {
         float height = 0;
 
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < simulateCount; i++)
             height += sineWaves[i].amplitude * Mathf.Sin(sineWaves[i].frequency * (sineWaves[i].direction.x * pos.x + sineWaves[i].direction.y * pos.z) + sineWaves[i].phase * Time.time);
         
         return height;

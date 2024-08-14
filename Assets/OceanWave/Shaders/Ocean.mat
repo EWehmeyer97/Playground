@@ -59,9 +59,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _CircleAmplitude: 0.01
+    - _CircleAmplitude_1: 0
+    - _CircleAmplitude_2: 0
+    - _CircleAmplitude_3: 0
+    - _CircleFrequency: 3.55
+    - _CircleMaxDist: 102.27
+    - _CircleSpeed: -4
     - _FresnelPower: 3
     - _FresnelStrength: 1
-    - _NormalStrength: 0.6
+    - _NormalStrength: 0.5
     - _OceanAmplitude_0: 0.1
     - _OceanAmplitude_1: 0.1
     - _OceanFrequency_0: 0.5
@@ -75,13 +82,14 @@ Material:
     - _OceanSpeed: 1
     - _OceanSpeed_0: 0
     - _OceanSpeed_1: 0
-    - _Power: 20
+    - _Power: 80
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0.85
+    - _Smoothness: 0.8
     m_Colors:
-    - _BaseColor: {r: 0.36163503, g: 0.73550546, b: 1, a: 1}
-    - _BaseColor_1: {r: 0.755, g: 0.46713585, b: 0.14156249, a: 1}
+    - _BaseColor: {r: 0.395784, g: 0.5849665, b: 0.71699995, a: 1}
+    - _BaseColor_1: {r: 0, g: 0, b: 0, a: 1}
+    - _CirclePos: {r: -4.51, g: -22.3, b: 0, a: 0}
     - _OceanDirection: {r: 4.16, g: 4.97, b: 0, a: 0}
     - _OceanDirection_0: {r: 0.8320503, g: 0.5547002, b: 0, a: 0}
     - _OceanDirection_1: {r: 0.9805807, g: -0.19611613, b: 0, a: 0}
