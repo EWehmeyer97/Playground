@@ -15,21 +15,9 @@ public class Engine : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
-        Vector3 pos = transform.position + transform.TransformDirection(location);
+        Vector3 pos = GetEnginePosition();
         float cover = OceanSimulation.Instance.GetWaterHeight(pos);
         
         rb.AddForce(transform.forward * force * (cover - pos.y > 0f ? 1f : 0.5f));
@@ -38,6 +26,11 @@ public class Engine : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + transform.TransformDirection(location), 0.1f);
+        Gizmos.DrawWireSphere(GetEnginePosition(), 0.1f);
+    }
+
+    public Vector3 GetEnginePosition()
+    {
+        return transform.TransformPoint(location);
     }
 }

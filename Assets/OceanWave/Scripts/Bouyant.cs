@@ -33,12 +33,12 @@ public class Bouyant : MonoBehaviour
     {
         for (int i = 0; i < location.Length; i++)
         {
-            Vector3 force = -Vector3.up * 9.81f * location[i].w;
+            Vector3 force = -Vector3.up * 9.81f / location.Length;
             Vector3 pos = transform.position + transform.TransformDirection(location[i]);
             float cover = OceanSimulation.Instance.GetWaterHeight(pos) - pos.y;
             if (cover > 0f)
             {
-                force += Vector3.up * floatation * (1 + cover) * massPoint[i];
+                force += Vector3.up * floatation * cover * massPoint[i];
             }
                 rb.AddForceAtPosition(force, pos);
         }

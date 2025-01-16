@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OceanSimulation : Singleton<OceanSimulation>
 {
-    public Material ocean;
+    public Material[] oceanMats;
     public OceanWave[] waves;
 
     [SerializeField] private int waveCount = 8;
@@ -22,10 +22,13 @@ public class OceanSimulation : Singleton<OceanSimulation>
             sineWaves[i].amplitude = waves[i].amplitude;
             sineWaves[i].phase = waves[i].speed * sineWaves[i].frequency;
 
-            ocean.SetVector("_OceanDirection_" + i, sineWaves[i].direction);
-            ocean.SetFloat("_OceanFrequency_" + i, sineWaves[i].frequency);
-            ocean.SetFloat("_OceanAmplitude_" + i, sineWaves[i].amplitude);
-            ocean.SetFloat("_OceanSpeed_" + i, sineWaves[i].phase);
+            foreach (var oceanMat in oceanMats)
+            {
+                oceanMat.SetVector("_OceanDirection_" + i, sineWaves[i].direction);
+                oceanMat.SetFloat("_OceanFrequency_" + i, sineWaves[i].frequency);
+                oceanMat.SetFloat("_OceanAmplitude_" + i, sineWaves[i].amplitude);
+                oceanMat.SetFloat("_OceanSpeed_" + i, sineWaves[i].phase);
+            }
         }
 
         float freq = 2f / waves[0].waveLength;
@@ -39,17 +42,21 @@ public class OceanSimulation : Singleton<OceanSimulation>
             sineWaves[i].amplitude = amp;
             sineWaves[i].phase = waves[0].speed * freq;
 
-            ocean.SetVector("_OceanDirection_" + i, sineWaves[i].direction);
-            ocean.SetFloat("_OceanFrequency_" + i, sineWaves[i].frequency);
-            ocean.SetFloat("_OceanAmplitude_" + i, sineWaves[i].amplitude);
-            ocean.SetFloat("_OceanSpeed_" + i, sineWaves[i].phase);
+            foreach (var oceanMat in oceanMats)
+            {
+                oceanMat.SetVector("_OceanDirection_" + i, sineWaves[i].direction);
+                oceanMat.SetFloat("_OceanFrequency_" + i, sineWaves[i].frequency);
+                oceanMat.SetFloat("_OceanAmplitude_" + i, sineWaves[i].amplitude);
+                oceanMat.SetFloat("_OceanSpeed_" + i, sineWaves[i].phase);
+            }
         }
     }
 
     private void OnApplicationQuit()
     {
-        for (int i = 0; i < sineWaves.Length; i++)
-            ocean.SetFloat("_OceanSpeed_" + i, 0);
+        foreach (var oceanMat in oceanMats)
+            for (int i = 0; i < sineWaves.Length; i++)
+                oceanMat.SetFloat("_OceanSpeed_" + i, 0);
     }
 
     public float GetWaterHeight(Vector3 pos)
