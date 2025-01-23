@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+		moveDirection = Vector3.forward;// new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 		if (Input.GetButton("Jump"))
 		{
 			float milliSecondsElapsed = Time.deltaTime * 1000;

@@ -40,7 +40,7 @@ public class GravityController : MonoBehaviour
 
     public void RemoveGravity(int i, GravityOrbit orbit)
     {
-        if (orbits[i] = orbit)
+        if (orbits[i] == orbit)
             orbits[i] = null;
     }
 }
