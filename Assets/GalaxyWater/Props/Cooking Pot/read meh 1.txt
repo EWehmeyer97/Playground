@@ -1,1 +1,0 @@
-cmp_obj_pot01_body01 uses mirrored texture wrapping.
