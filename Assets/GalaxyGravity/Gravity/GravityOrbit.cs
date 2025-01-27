@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -11,7 +9,7 @@ public abstract class GravityOrbit : MonoBehaviour
 
     public float Strength { get { return strength; } }
 
-    public abstract Vector3 GetGravity(Vector3 characterPos);
+    public abstract Gravity GetGravity(Vector3 characterPos);
 
     private void Awake()
     {
@@ -34,5 +32,23 @@ public abstract class GravityOrbit : MonoBehaviour
         {
             controller.RemoveGravity(priority, this);
         }
+    }
+}
+
+public class Gravity
+{
+    public Vector3 direction;
+    public float strength;
+
+    public Gravity(Vector3 direction, float strength)
+    {
+        this.direction = direction;
+        this.strength = strength;
+    }
+
+    public Gravity()
+    {
+        this.direction = -Vector3.up;
+        this.strength = 9.81f;
     }
 }

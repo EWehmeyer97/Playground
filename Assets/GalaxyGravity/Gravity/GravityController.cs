@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class GravityController : MonoBehaviour
 {
     public GravityOrbit[] orbits = new GravityOrbit[4];
@@ -16,21 +15,19 @@ public class GravityController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 gravityUp = -Vector3.up;
-        float gravityStrength = 9.81f;
+        Gravity gravity = new Gravity();
         for(int i = orbits.Length - 1; i >= 0; i--)
         {
             if (orbits[i] != null)
             {
-                gravityUp = orbits[i].GetGravity(transform.position);
-                gravityStrength = orbits[i].Strength;
+                gravity = orbits[i].GetGravity(transform.position);
                 break;
             }
         }
 
-        Quaternion targetRot = Quaternion.FromToRotation(transform.up, gravityUp) * transform.rotation;
+        Quaternion targetRot = Quaternion.FromToRotation(transform.up, -gravity.direction) * transform.rotation;
         rb.rotation = Quaternion.Lerp(transform.rotation, targetRot, rotationSpeed * Time.fixedDeltaTime);
-        rb.AddForce(-gravityUp * gravityStrength * rb.mass);
+        rb.AddForce(gravity.direction * gravity.strength * rb.mass);
     }
 
     public void SetGravity(int i, GravityOrbit orbit)
