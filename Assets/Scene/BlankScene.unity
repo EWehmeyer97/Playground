@@ -3714,7 +3714,7 @@ MonoBehaviour:
   tolerance: 0.025
   isRootBodyPart: 1
   physics: {fileID: 13400000, guid: d2a8a7778180b0840be2a80bbbf40560, type: 2}
-  distance: 1
+  connectionDistance: 1
 --- !u!1 &693243501 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4610779447819735917, guid: 9ce060d7215a8cc429a801c763d67a2a,
@@ -3958,7 +3958,7 @@ MonoBehaviour:
   tolerance: 0.025
   isRootBodyPart: 1
   physics: {fileID: 13400000, guid: d2a8a7778180b0840be2a80bbbf40560, type: 2}
-  distance: 1
+  connectionDistance: 1
 --- !u!1 &748969235 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7707967429220723310, guid: de15b00b390a9b640b4ea98a21056f90,
@@ -4199,7 +4199,7 @@ MonoBehaviour:
   tolerance: 0.025
   isRootBodyPart: 1
   physics: {fileID: 13400000, guid: d2a8a7778180b0840be2a80bbbf40560, type: 2}
-  distance: 1
+  connectionDistance: 1
 --- !u!1 &1006311539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8574294464875377822, guid: de15b00b390a9b640b4ea98a21056f90,
@@ -4646,7 +4646,7 @@ MonoBehaviour:
   tolerance: 0.025
   isRootBodyPart: 1
   physics: {fileID: 13400000, guid: d2a8a7778180b0840be2a80bbbf40560, type: 2}
-  distance: 1
+  connectionDistance: 0.5
 --- !u!65 &1294878525
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5932,7 +5932,7 @@ MonoBehaviour:
   tolerance: 0.025
   isRootBodyPart: 0
   physics: {fileID: 13400000, guid: d2a8a7778180b0840be2a80bbbf40560, type: 2}
-  distance: 1.5
+  connectionDistance: 0.5
 --- !u!1 &1740608539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3088676592924848900, guid: de15b00b390a9b640b4ea98a21056f90,
@@ -6861,7 +6861,7 @@ MonoBehaviour:
   tolerance: 0.025
   isRootBodyPart: 0
   physics: {fileID: 13400000, guid: d2a8a7778180b0840be2a80bbbf40560, type: 2}
-  distance: 0.5
+  connectionDistance: 0.5
 --- !u!138 &2001949530
 FixedJoint:
   m_ObjectHideFlags: 0

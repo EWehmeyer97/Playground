@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class JellyControl : MonoBehaviour
+public class Softbody : MonoBehaviour
 {
     [SerializeField] private JellySetup setupMode;
     [SerializeField] private Transform root;
@@ -16,7 +16,7 @@ public class JellyControl : MonoBehaviour
     [SerializeField] private PhysicsMaterial physics;
 
     [Header("Distance Based Properties")]
-    [SerializeField][Min(0f)] private float distance = .5f;
+    [SerializeField][Min(0f)] private float connectionDistance = .5f;
 
     private Rigidbody[] bodies;
     private SpringJoint[] joints;
@@ -52,7 +52,7 @@ public class JellyControl : MonoBehaviour
             {
                 foreach (var otherBody in bodies)
                 {
-                    if (body != otherBody && Vector3.Distance(body.position, otherBody.position) <= distance)
+                    if (body != otherBody && Vector3.Distance(body.position, otherBody.position) <= connectionDistance)
                     {
                         var sj = body.gameObject.AddComponent<SpringJoint>();
                         sj.connectedBody = otherBody;
