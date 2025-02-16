@@ -1704,6 +1704,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 257abadfc4bc67945804107b0996c1b7, type: 3}
   - {fileID: 21300000, guid: 09caf5ffd8171214486618c7e6c75e2d, type: 3}
   - {fileID: 21300000, guid: 67959f5b672136f4f851f149194429b8, type: 3}
+  inventoryCSV: {fileID: 4900000, guid: 2892ceceae4cc0d4b85d9196fc30acc8, type: 3}
 --- !u!4 &880343896
 Transform:
   m_ObjectHideFlags: 0
