@@ -14,7 +14,9 @@ public class InventorySpawn : MonoBehaviour
         foreach (int id in ids)
         {
             var item = Instantiate(displayElement, spawn);
-            item.SetupDisplay(id, MaterialInfo.Instance.GetMaterialItem(id).sprite, InventoryInfo.Instance.GetInventoryItem(id).count);
+            var material = MaterialInfo.Instance.GetMaterialItem(id);
+            var inventory = InventoryInfo.Instance.GetInventoryItem(id);
+            item.SetupDisplay(id, material.sprite, inventory.count, material.category == Category.Food && material.subcategory != SubCategory.Ingredient, inventory.isFavorite);
             displayItems.Add(item);
         }
 

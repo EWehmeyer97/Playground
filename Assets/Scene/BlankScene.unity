@@ -620,6 +620,7 @@ MonoBehaviour:
   itemBar: {fileID: 423000219}
   barSlider: {fileID: 1116224311}
   itemName: {fileID: 1051540976}
+  spacing: 172
 --- !u!1 &537313323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2922,7 +2923,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 12, y: -6}
+  m_SizeDelta: {x: 12, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1759435080
 MonoBehaviour:
