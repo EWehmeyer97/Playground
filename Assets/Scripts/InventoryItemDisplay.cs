@@ -14,4 +14,6 @@ public class InventoryItemDisplay : MonoBehaviour
         itemImage.sprite = itemSprite;
         itemCount.text = "x" + count;
     }
+
+    public int ID { get { return idRef; } }
 }

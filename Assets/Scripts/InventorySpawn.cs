@@ -1,15 +1,23 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventorySpawn : MonoBehaviour
 {
     [SerializeField] private Transform spawn;
 
     [SerializeField] private InventoryItemDisplay displayElement;
-    void Start()
+    public void SpawnList(List<int> ids)
     {
-        foreach(var item in InventoryInfo.Instance.InventoryData)
-            Instantiate(displayElement, spawn).SetupDisplay(item.Key, MaterialInfo.Instance.GetMaterialItem(item.Key).sprite, item.Value.count);
-        
+        spawn.DestroyChildren();
+
+        List<InventoryItemDisplay> displayItems = new List<InventoryItemDisplay>();
+        foreach (int id in ids)
+        {
+            var item = Instantiate(displayElement, spawn);
+            item.SetupDisplay(id, MaterialInfo.Instance.GetMaterialItem(id).sprite, InventoryInfo.Instance.GetInventoryItem(id).count);
+            displayItems.Add(item);
+        }
+
+        InventorySearcher.Instance.CreateNewList(displayItems);
     }
 }

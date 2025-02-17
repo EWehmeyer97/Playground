@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 65621388}
   - component: {fileID: 65621390}
   - component: {fileID: 65621389}
-  - component: {fileID: 65621391}
   m_Layer: 5
   m_Name: 01-Recreation
   m_TagString: Untagged
@@ -199,21 +198,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65621387}
   m_CullTransparentMesh: 1
---- !u!114 &65621391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 65621387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29fa06a23e8a3fe40b8b9bf5f79865a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawn: {fileID: 820027320}
-  displayElement: {fileID: 2918364220386460978, guid: 3329a768e8303514cb7817e52c7cd9a2,
-    type: 3}
 --- !u!1 &91396225
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +536,7 @@ GameObject:
   - component: {fileID: 423000219}
   - component: {fileID: 423000221}
   - component: {fileID: 423000220}
+  - component: {fileID: 423000222}
   m_Layer: 5
   m_Name: FuseMenu
   m_TagString: Untagged
@@ -618,6 +603,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423000218}
   m_CullTransparentMesh: 1
+--- !u!114 &423000222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423000218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4232f47b377bdd5419b7cc42b87810df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keepAlive: 0
+  onlyOnEnable: 1
+  itemBar: {fileID: 423000219}
+  barSlider: {fileID: 1116224311}
+  itemName: {fileID: 1051540976}
 --- !u!1 &537313323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,6 +1046,7 @@ GameObject:
   - component: {fileID: 820027323}
   - component: {fileID: 820027322}
   - component: {fileID: 820027321}
+  - component: {fileID: 820027325}
   m_Layer: 5
   m_Name: Holder
   m_TagString: Untagged
@@ -1148,6 +1151,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820027319}
   m_CullTransparentMesh: 1
+--- !u!114 &820027325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820027319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fa06a23e8a3fe40b8b9bf5f79865a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawn: {fileID: 820027320}
+  displayElement: {fileID: 2918364220386460978, guid: 3329a768e8303514cb7817e52c7cd9a2,
+    type: 3}
 --- !u!1 &837896128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,6 +1670,7 @@ GameObject:
   - component: {fileID: 975896095}
   - component: {fileID: 975896097}
   - component: {fileID: 975896096}
+  - component: {fileID: 975896098}
   m_Layer: 5
   m_Name: Sorting Bar
   m_TagString: Untagged
@@ -1718,6 +1737,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975896094}
   m_CullTransparentMesh: 1
+--- !u!114 &975896098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975896094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a774332c31f754abd55582bb71eb0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keepAlive: 0
+  onlyOnEnable: 1
+  spawner: {fileID: 820027325}
+  sortingText: {fileID: 1244550634}
+  toggles:
+  - {fileID: 91396227}
+  - {fileID: 1463644259}
+  - {fileID: 1642310235}
+  - {fileID: 1312341820}
+  sortType:
+  - By type
+  - By Fuse attack power
+  - By most used
+  - Zonai devices
 --- !u!1 &1051540974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,7 +1936,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 164, y: 17}
+  m_SizeDelta: {x: 164, y: 13}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1116224311
 MonoBehaviour:
@@ -1938,8 +1983,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1759435079}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 251
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2840,7 +2885,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -14, y: 0}
+  m_SizeDelta: {x: -12, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1759435078
 GameObject:
@@ -2877,7 +2922,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: -6}
+  m_SizeDelta: {x: 12, y: -6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1759435080
 MonoBehaviour:

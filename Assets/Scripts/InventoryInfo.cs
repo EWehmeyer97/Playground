@@ -41,6 +41,11 @@ public class InventoryInfo : Singleton<InventoryInfo>
             }
         }
     }
+
+    public InventoryData GetInventoryItem(int id)
+    {
+        return inventoryData[id];
+    }
 }
 
 public class InventoryData
