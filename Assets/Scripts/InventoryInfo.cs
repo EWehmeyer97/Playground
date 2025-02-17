@@ -1,19 +1,27 @@
+using CsvHelper;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using UnityEngine;
-using CsvHelper;
-using System.Collections.Generic;
-using System.ComponentModel;
 
-public class InventoryInfo : MonoBehaviour
+public class InventoryInfo : Singleton<InventoryInfo>
 {
-    [SerializeField] private Sprite[] sprites;
-    public TextAsset inventoryCSV;
+    [SerializeField] private TextAsset sampleSaveCSV;
 
-    [System.NonSerialized] public Dictionary<int, InventoryData> inventoryData = new Dictionary<int, InventoryData>();
-    private void Awake()
+    private Dictionary<int, InventoryData> inventoryData = new Dictionary<int, InventoryData>();
+
+    public Dictionary<int, InventoryData> InventoryData {  get { return inventoryData; } }
+
+    protected override void Awake()
     {
-        using (var reader = new StringReader(inventoryCSV.text))
+        base.Awake();
+
+        LoadSaveData();
+    }
+
+    private void LoadSaveData()
+    {
+        using (var reader = new StringReader(sampleSaveCSV.text))
         {
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
@@ -24,12 +32,9 @@ public class InventoryInfo : MonoBehaviour
                 {
                     var item = new InventoryData
                     {
-                        name = csv.GetField("Name"),
-                        category = (Category)csv.GetField<int>("Category"),
-                        subcategory = (SubCategory)(csv.GetField<int>("Category") * 3 + csv.GetField<int>("SubCategory")),
-                        chemical = (Chemical)csv.GetField<int>("Chemical"),
-                        attackPower = csv.GetField<int>("Attack_Power"),
-                        isSharp = csv.GetField<int>("Is_Sharp") == 1
+                        count = csv.GetField<int>("Count"),
+                        timesUsed = csv.GetField<int>("Times_Used"),
+                        isFavorite = csv.GetField<int>("Is_Favorite") == 1
                     };
                     inventoryData.Add(csv.GetField<int>("ID"), item);
                 }
@@ -40,48 +45,7 @@ public class InventoryInfo : MonoBehaviour
 
 public class InventoryData
 {
-    public string name;
-    public Category category;
-    public SubCategory subcategory;
-    public Chemical chemical;
-    public int attackPower;
-    public bool isSharp;
-}
-
-public enum Category
-{
-    [Description("Food")]
-    Food,
-
-    [Description("Monster Part")]
-    Monster_Part,
-
-    [Description("Material")]
-    Material,
-
-    [Description("Zonai Device")]
-    Zonai_Device
-}
-
-public enum SubCategory
-{
-    [Description("Plant")] Plant, [Description("Meat")] Meat, [Description("Ingredient")] Ingredient,
-
-    [Description("Eye")] Eye, [Description("Wing")] Wing, [Description("Body")] Body,
-
-    [Description("Mineral")] Mineral, [Description("Creature")] Creature, [Description("Flower")] Flower,
-
-    [Description("Tool")] Tool
-}
-
-public enum Chemical
-{
-    [Description("Normal")] Normal,
-    [Description("Explosive")] Explosive, //1
-    [Description("Fire")] Fire,
-    [Description("Ice")] Ice,
-    [Description("Water")] Water, //4
-    [Description("Electric")] Electric,
-    [Description("Wind")] Wind,
-    [Description("Glow")] Glow //7
+    public int count;
+    public int timesUsed;
+    public bool isFavorite;
 }

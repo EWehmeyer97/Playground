@@ -18,19 +18,19 @@ public class Singleton<T> : MonoBehaviour where T: MonoBehaviour
         get { return _instance != null; }
     }
 
-    public virtual void Awake()
+    protected virtual void Awake()
     {
         if (!onlyOnEnable)
             Setup();
     }
 
-    public virtual void OnEnable()
+    protected virtual void OnEnable()
     {
         if (onlyOnEnable)
             Setup();
     }
 
-    public virtual void OnDisable() 
+    protected virtual void OnDisable() 
     {
         if (onlyOnEnable)
             _instance = null;
