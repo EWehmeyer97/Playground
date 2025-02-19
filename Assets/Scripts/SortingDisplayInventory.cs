@@ -3,27 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using UnityEngine.InputSystem;
 
 public class SortingDisplayInventory : Singleton<SortingDisplayInventory>
 {
     [SerializeField] private InventorySpawn spawner;
     [SerializeField] private TextMeshProUGUI sortingText;
+    [SerializeField] private Button nextSort;
     [SerializeField] private Toggle[] toggles;
     [SerializeField] private string[] sortType;
+
+    private int trackedValue = 0;
 
     protected override void Awake()
     {
         base.Awake();
 
+        //UI Navigation
         foreach(var toggle in toggles)
         {
             toggle.onValueChanged.AddListener(SortList);
         }
-    }
+        nextSort.onClick.AddListener(NextSort);
 
+        //Control Navigation
+        InputActions.Instance.Input.Arrow_Fuse_UI.Sort.performed += NextSort;
+    }
     private void Start()
     {
         SortList(true);
+    }
+
+    private void NextSort(InputAction.CallbackContext context)
+    {
+        NextSort();
+    }
+
+    private void NextSort()
+    {
+        trackedValue++;
+        if (trackedValue == toggles.Length)
+            trackedValue = 0;
+
+        toggles[trackedValue].isOn = true;
     }
 
     private void SortList(bool arg)
