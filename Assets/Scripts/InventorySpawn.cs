@@ -4,7 +4,7 @@ using UnityEngine;
 public class InventorySpawn : MonoBehaviour
 {
     [SerializeField] private Transform spawn;
-
+    [SerializeField] private InventorySearcher searcher;
     [SerializeField] private InventoryItemDisplay displayElement;
     public void SpawnList(List<int> ids)
     {
@@ -20,6 +20,6 @@ public class InventorySpawn : MonoBehaviour
             displayItems.Add(item);
         }
 
-        InventorySearcher.Instance.CreateNewList(displayItems);
+        searcher.UpdateList(displayItems);
     }
 }

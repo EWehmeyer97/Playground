@@ -10,7 +10,6 @@ public class InputActions : Singleton<InputActions>
         base.Awake();
 
         input = new PlayerControls();
-        input.PlayerAction.Enable();
     }
 
     public void EnableFuseUI()

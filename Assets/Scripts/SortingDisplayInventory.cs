@@ -6,7 +6,7 @@ using TMPro;
 using System;
 using UnityEngine.InputSystem;
 
-public class SortingDisplayInventory : Singleton<SortingDisplayInventory>
+public class SortingDisplayInventory : MonoBehaviour
 {
     [SerializeField] private InventorySpawn spawner;
     [SerializeField] private TextMeshProUGUI sortingText;
@@ -16,20 +16,28 @@ public class SortingDisplayInventory : Singleton<SortingDisplayInventory>
 
     private int trackedValue = 0;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
-
         //UI Navigation
         foreach(var toggle in toggles)
         {
             toggle.onValueChanged.AddListener(SortList);
         }
         nextSort.onClick.AddListener(NextSort);
+    }
 
+    void OnEnable()
+    {
         //Control Navigation
         InputActions.Instance.Input.Arrow_Fuse_UI.Sort.performed += NextSort;
     }
+
+    void OnDisable()
+    {
+        //Control Navigation
+        InputActions.Instance.Input.Arrow_Fuse_UI.Sort.performed -= NextSort;
+    }
+
     private void Start()
     {
         SortList(true);

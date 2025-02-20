@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class InventorySearcher : Singleton<InventorySearcher>
+public class InventorySearcher : MonoBehaviour
 {
     [Header("Moving Bar")]
     [SerializeField] private RectTransform itemBar;
@@ -27,23 +27,28 @@ public class InventorySearcher : Singleton<InventorySearcher>
     private Vector2 originalPosition;
     private int trackedValue = 0;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
-
         originalPosition = itemBar.anchoredPosition;
     }
 
+    //UI Controls
     private void Start()
     {
-        //UI Controls
         barSlider.onValueChanged.AddListener(UpdateSelected);
         leftPress.onClick.AddListener(UpdateLeft);
         rightPress.onClick.AddListener(UpdateRight);
+    }
 
-        //Input Controls
-        InputActions.Instance.EnableFuseUI();
+    //Key Controls
+    void OnEnable()
+    {
         InputActions.Instance.Input.Arrow_Fuse_UI.Search.performed += UpdateControl;
+    }
+
+    void OnDisable()
+    {
+        InputActions.Instance.Input.Arrow_Fuse_UI.Search.performed -= UpdateControl;
     }
 
     private void UpdateControl(InputAction.CallbackContext context)
@@ -86,7 +91,7 @@ public class InventorySearcher : Singleton<InventorySearcher>
         UpdateSelected(trackedValue + 1);
     }
 
-    public void CreateNewList(List<InventoryItemDisplay> newList)
+    public void UpdateList(List<InventoryItemDisplay> newList)
     {
         displayItems = newList;
         barSlider.maxValue = displayItems.Count;
