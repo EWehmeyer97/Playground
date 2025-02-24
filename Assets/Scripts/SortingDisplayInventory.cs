@@ -6,87 +6,61 @@ using TMPro;
 using System;
 using UnityEngine.InputSystem;
 
-public class SortingDisplayInventory : MonoBehaviour
+public class SortingDisplayInventory : TogglePaginationMenu
 {
     [SerializeField] private InventorySpawn spawner;
+    [SerializeField] private CategoryDisplayInventory category;
     [SerializeField] private TextMeshProUGUI sortingText;
-    [SerializeField] private Button nextSort;
-    [SerializeField] private Toggle[] toggles;
     [SerializeField] private string[] sortType;
-
-    private int trackedValue = 0;
-
-    void Awake()
-    {
-        //UI Navigation
-        foreach(var toggle in toggles)
-        {
-            toggle.onValueChanged.AddListener(SortList);
-        }
-        nextSort.onClick.AddListener(NextSort);
-    }
 
     void OnEnable()
     {
         //Control Navigation
-        InputActions.Instance.Input.Arrow_Fuse_UI.Sort.performed += NextSort;
+        InputActions.Instance.Input.Arrow_Fuse_UI.Sort.performed += Next;
     }
 
     void OnDisable()
     {
         //Control Navigation
-        InputActions.Instance.Input.Arrow_Fuse_UI.Sort.performed -= NextSort;
+        InputActions.Instance.Input.Arrow_Fuse_UI.Sort.performed -= Next;
     }
 
     private void Start()
     {
-        SortList(true);
+        Sort(true);
     }
 
-    private void NextSort(InputAction.CallbackContext context)
+    private void Next(InputAction.CallbackContext context)
     {
-        NextSort();
+        Next();
     }
 
-    private void NextSort()
+    public override void Sort(bool arg)
     {
-        trackedValue++;
-        if (trackedValue == toggles.Length)
-            trackedValue = 0;
+        base.Sort(arg);
 
-        toggles[trackedValue].isOn = true;
+        spawner.SpawnList(SpawnableList());
+        sortingText.text = sortType[TrackedValue];
     }
 
-    private void SortList(bool arg)
-    {
-        if (!arg)
-            return;
-
-        int sortIndex;
-        for (sortIndex = 0; sortIndex < toggles.Length; sortIndex++)
-            if (toggles[sortIndex].isOn)
-                break;
-
-        spawner.SpawnList(SpawnableList(sortIndex));
-        sortingText.text = sortType[sortIndex];
-    }
-
-    private List<int> SpawnableList(int sortIndex)
+    private List<int> SpawnableList()
     {
         var list = new List<int>();
-        switch (sortIndex)
+
+        var keys = category == null ? InventoryInfo.Instance.InventoryData.Keys.ToList<int>() : category.GetCategory();
+        switch (TrackedValue)
         {
             case 0:
-                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.OrderBy(item => MaterialInfo.Instance.GetMaterialItem(item).category));
+                list.AddRange(keys.OrderBy(item => MaterialInfo.Instance.GetMaterialItem(item).category));
                 break;
             case 1:
-                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.OrderByDescending(item => MaterialInfo.Instance.GetMaterialItem(item).attackPower));
+                list.AddRange(keys.OrderByDescending(item => MaterialInfo.Instance.GetMaterialItem(item).attackPower));
                 break;
             case 2:
-                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.OrderByDescending(item => InventoryInfo.Instance.GetInventoryItem(item).timesUsed));
+                list.AddRange(keys.OrderByDescending(item => InventoryInfo.Instance.GetInventoryItem(item).timesUsed));
                 break;
             case 3:
-                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == Category.Zonai_Device));
+                list.AddRange(keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == Category.Zonai_Device));
                 break;
             default:
                 break;
