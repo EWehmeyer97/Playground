@@ -8,19 +8,31 @@ using UnityEngine.UI;
 
 public class CategoryDisplayInventory : TogglePaginationMenu
 {
+    [SerializeField] private Toggle favoritesOnly;
     [SerializeField] private SortingDisplayInventory sortInventory;
     [SerializeField] private GameObject subCategoryMenu;
+
+    private bool onlyFavorite = false;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        favoritesOnly.onValueChanged.AddListener(OnFavorite);
+    }
 
     void OnEnable()
     {
         //Control Navigation
         InputActions.Instance.Input.Arrow_Fuse_UI.MenuSearch.performed += Next;
+        InputActions.Instance.Input.Arrow_Fuse_UI.FavoriteToggle.performed += OnFavorite;
     }
 
     void OnDisable()
     {
         //Control Navigation
         InputActions.Instance.Input.Arrow_Fuse_UI.MenuSearch.performed -= Next;
+        InputActions.Instance.Input.Arrow_Fuse_UI.FavoriteToggle.performed -= OnFavorite;
     }
 
     private void Next(InputAction.CallbackContext context)
@@ -31,6 +43,17 @@ public class CategoryDisplayInventory : TogglePaginationMenu
             Next();
     }
 
+    private void OnFavorite(InputAction.CallbackContext context)
+    {
+        OnFavorite(!onlyFavorite);
+    }
+
+    private void OnFavorite(bool arg0)
+    {
+        onlyFavorite = arg0;
+        favoritesOnly.SetIsOnWithoutNotify(arg0);
+        Sort(true);
+    }
 
     public override void Sort(bool arg)
     {
@@ -64,6 +87,9 @@ public class CategoryDisplayInventory : TogglePaginationMenu
                 list.AddRange(InventoryInfo.Instance.InventoryData.Keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).chemical != Chemical.Normal));
                 break;
         }
+
+        if (onlyFavorite)
+            list = list.Where(item => InventoryInfo.Instance.GetInventoryItem(item).isFavorite == true).ToList<int>();
 
         return list;
     }

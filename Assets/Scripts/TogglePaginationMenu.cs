@@ -11,7 +11,7 @@ public class TogglePaginationMenu : MonoBehaviour
 
     protected int TrackedValue { get { return trackedValue; } }
 
-    void Awake()
+    protected virtual void Awake()
     {
         //UI Navigation
         foreach (var toggle in toggles)

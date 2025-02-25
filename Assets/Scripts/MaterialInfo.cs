@@ -102,9 +102,8 @@ public enum Chemical
     [Description("Normal")] Normal,
     [Description("Explosive")] Explosive, //1
     [Description("Fire")] Fire,
-    [Description("Ice")] Ice,
-    [Description("Water")] Water, //4
-    [Description("Electric")] Electric,
-    [Description("Wind")] Wind,
-    [Description("Glow")] Glow //7
+    [Description("Ice")] Ice, //3
+    [Description("Water")] Water,
+    [Description("Electric")] Electric, //5
+    [Description("Light")] Light
 }
