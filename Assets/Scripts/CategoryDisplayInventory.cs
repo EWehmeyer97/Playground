@@ -10,7 +10,6 @@ public class CategoryDisplayInventory : TogglePaginationMenu
 {
     [SerializeField] private Toggle favoritesOnly;
     [SerializeField] private SortingDisplayInventory sortInventory;
-    [SerializeField] private GameObject subCategoryMenu;
 
     private bool onlyFavorite = false;
 
@@ -33,6 +32,11 @@ public class CategoryDisplayInventory : TogglePaginationMenu
         //Control Navigation
         InputActions.Instance.Input.Arrow_Fuse_UI.MenuSearch.performed -= Next;
         InputActions.Instance.Input.Arrow_Fuse_UI.FavoriteToggle.performed -= OnFavorite;
+    }
+
+    private void Start()
+    {
+        Sort(true);
     }
 
     private void Next(InputAction.CallbackContext context)
@@ -72,16 +76,16 @@ public class CategoryDisplayInventory : TogglePaginationMenu
                 list.AddRange(InventoryInfo.Instance.InventoryData.Keys);
                 break;
             case 1: //Food
-                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == Category.Food));
+                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == MaterialCategory.Food));
                 break;
             case 2: //Monster
-                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == Category.Monster_Part));
+                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == MaterialCategory.Monster_Part));
                 break;
             case 3: //Material
-                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == Category.Material));
+                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == MaterialCategory.Material));
                 break;
             case 4: //Zonai
-                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == Category.Zonai_Device));
+                list.AddRange(InventoryInfo.Instance.InventoryData.Keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == MaterialCategory.Zonai_Device));
                 break;
             case 5: //Elemental
                 list.AddRange(InventoryInfo.Instance.InventoryData.Keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).chemical != Chemical.Normal));

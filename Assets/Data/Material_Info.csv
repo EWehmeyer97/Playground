@@ -1,9 +1,9 @@
 ID,Name,Category,SubCategory,Chemical,Is_Sharp,Attack_Power
-0,Voltfruit,0,0,0,0,0
+0,Apple,0,0,0,0,0
 1,Wildberry,0,0,0,0,0
 2,Zapshroom,0,0,0,0,0
 3,Acorn,0,0,0,0,0
-4,Apple,0,0,0,0,0
+4,Voltfruit,0,0,0,0,0
 5,Big_Hearty_Radish,0,0,0,0,0
 6,Big_Hearty_Truffle,0,0,0,0,0
 7,Brightcap,0,0,0,0,0
@@ -207,7 +207,7 @@ ID,Name,Category,SubCategory,Chemical,Is_Sharp,Attack_Power
 205,Thunderwing_Butterfly,2,1,0,0,0
 206,Tireless_Frog,2,1,0,0,0
 207,Topaz,2,0,5,0,0
-208,Warm_Darner,2,2,0,0,0
+208,Warm_Darner,2,1,0,0,0
 209,Warm_Safflina,2,2,0,0,0
 210,Winterwing_Butterfly,2,1,0,0,0
 211,Wood,2,0,0,0,0

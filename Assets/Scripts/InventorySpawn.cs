@@ -16,7 +16,7 @@ public class InventorySpawn : MonoBehaviour
             var item = Instantiate(displayElement, spawn);
             var material = MaterialInfo.Instance.GetMaterialItem(id);
             var inventory = InventoryInfo.Instance.GetInventoryItem(id);
-            item.SetupDisplay(id, material.sprite, inventory.count, material.category == Category.Food && material.subcategory != SubCategory.Ingredient, inventory.isFavorite);
+            item.SetupDisplay(id, material.sprite, inventory.count, material.category == MaterialCategory.Food && material.subcategory != SubMaterialCategory.Ingredient, inventory.isFavorite);
             displayItems.Add(item);
         }
 

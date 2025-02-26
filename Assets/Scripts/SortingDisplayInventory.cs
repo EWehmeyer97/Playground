@@ -60,7 +60,7 @@ public class SortingDisplayInventory : TogglePaginationMenu
                 list.AddRange(keys.OrderByDescending(item => InventoryInfo.Instance.GetInventoryItem(item).timesUsed));
                 break;
             case 3:
-                list.AddRange(keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == Category.Zonai_Device));
+                list.AddRange(keys.Where(item => MaterialInfo.Instance.GetMaterialItem(item).category == MaterialCategory.Zonai_Device));
                 break;
             default:
                 break;

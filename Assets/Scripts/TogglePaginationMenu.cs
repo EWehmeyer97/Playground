@@ -52,4 +52,10 @@ public class TogglePaginationMenu : MonoBehaviour
 
         trackedValue = sortIndex;
     }
+
+    protected void ResetValue()
+    {
+        toggles[0].SetIsOnWithoutNotify(true);
+        trackedValue = 0;
+    }
 }

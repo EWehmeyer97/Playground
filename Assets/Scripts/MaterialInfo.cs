@@ -34,8 +34,8 @@ public class MaterialInfo : Singleton<MaterialInfo>
                     {
                         name = csv.GetField("Name").Replace('_', ' '),
                         sprite = GetSprite(csv.GetField("Name")),
-                        category = (Category)csv.GetField<int>("Category"),
-                        subcategory = (SubCategory)(csv.GetField<int>("Category") * 3 + csv.GetField<int>("SubCategory")),
+                        category = (MaterialCategory)csv.GetField<int>("Category"),
+                        subcategory = (SubMaterialCategory)(csv.GetField<int>("Category") * 3 + csv.GetField<int>("SubCategory")),
                         chemical = (Chemical)csv.GetField<int>("Chemical"),
                         attackPower = csv.GetField<int>("Attack_Power"),
                         isSharp = csv.GetField<int>("Is_Sharp") == 1
@@ -64,14 +64,14 @@ public class MaterialData
 {
     public Sprite sprite;
     public string name;
-    public Category category;
-    public SubCategory subcategory;
+    public MaterialCategory category;
+    public SubMaterialCategory subcategory;
     public Chemical chemical;
     public int attackPower;
     public bool isSharp;
 }
 
-public enum Category
+public enum MaterialCategory
 {
     [Description("Food")]
     Food,
@@ -86,7 +86,7 @@ public enum Category
     Zonai_Device
 }
 
-public enum SubCategory
+public enum SubMaterialCategory
 {
     [Description("Plant")] Plant, [Description("Meat")] Meat, [Description("Ingredient")] Ingredient,
 
