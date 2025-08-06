@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class FrameRate : MonoBehaviour
 {
+    [SerializeField] [Min(30)] private int targetFrameRate = 60;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = targetFrameRate;
     }
 
 }

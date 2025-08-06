@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OceanSimulation : Singleton<OceanSimulation>
 {
-    public Material[] oceanMats;
+    public Material[] oceanMaterials;
     public OceanWave[] waves;
 
     [SerializeField] private int waveCount = 8;
@@ -15,22 +15,17 @@ public class OceanSimulation : Singleton<OceanSimulation>
     void Start()
     {
         sineWaves = new SineWave[waveCount];
-        for(int i = 0; i < waves.Length; i++)
+
+        //Change Ocean Waves into mathematical waves
+        for (int i = 0; i < waves.Length; i++)
         {
             sineWaves[i].direction = waves[i].direction.normalized;
             sineWaves[i].frequency = 2f / waves[i].waveLength;
             sineWaves[i].amplitude = waves[i].amplitude;
             sineWaves[i].phase = waves[i].speed * sineWaves[i].frequency;
-
-            foreach (var oceanMat in oceanMats)
-            {
-                oceanMat.SetVector("_OceanDirection_" + i, sineWaves[i].direction);
-                oceanMat.SetFloat("_OceanFrequency_" + i, sineWaves[i].frequency);
-                oceanMat.SetFloat("_OceanAmplitude_" + i, sineWaves[i].amplitude);
-                oceanMat.SetFloat("_OceanSpeed_" + i, sineWaves[i].phase);
-            }
         }
 
+        //Generate additional mathematical Waves as noise
         float freq = 2f / waves[0].waveLength;
         float amp = waves[0].amplitude;
         for (int i = waves.Length; i < waveCount; i++)
@@ -41,20 +36,26 @@ public class OceanSimulation : Singleton<OceanSimulation>
             sineWaves[i].frequency = freq;
             sineWaves[i].amplitude = amp;
             sineWaves[i].phase = waves[0].speed * freq;
+        }
 
-            foreach (var oceanMat in oceanMats)
-            {
-                oceanMat.SetVector("_OceanDirection_" + i, sineWaves[i].direction);
-                oceanMat.SetFloat("_OceanFrequency_" + i, sineWaves[i].frequency);
-                oceanMat.SetFloat("_OceanAmplitude_" + i, sineWaves[i].amplitude);
-                oceanMat.SetFloat("_OceanSpeed_" + i, sineWaves[i].phase);
-            }
+        foreach (var oceanMat in oceanMaterials)
+            SetupOceanMaterial(oceanMat);
+    }
+
+    public void SetupOceanMaterial(Material oceanMat)
+    {
+        for (int i = 0; i < waveCount; i++)
+        {
+            oceanMat.SetVector("_OceanDirection_" + i, sineWaves[i].direction);
+            oceanMat.SetFloat("_OceanFrequency_" + i, sineWaves[i].frequency);
+            oceanMat.SetFloat("_OceanAmplitude_" + i, sineWaves[i].amplitude);
+            oceanMat.SetFloat("_OceanSpeed_" + i, sineWaves[i].phase);
         }
     }
 
     private void OnApplicationQuit()
     {
-        foreach (var oceanMat in oceanMats)
+        foreach (var oceanMat in oceanMaterials)
             for (int i = 0; i < sineWaves.Length; i++)
                 oceanMat.SetFloat("_OceanSpeed_" + i, 0);
     }
