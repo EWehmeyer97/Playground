@@ -11,9 +11,12 @@ public class OceanSimulation : Singleton<OceanSimulation>
     [SerializeField] private int simulateCount = 4;
 
     private SineWave[] sineWaves;
+    private ComputeBuffer waveBuffer;
 
     void Start()
     {
+        waveBuffer = new ComputeBuffer(waveCount, 20); //Byte size of Wave Struct
+
         sineWaves = new SineWave[waveCount];
 
         //Change Ocean Waves into mathematical waves
@@ -21,13 +24,13 @@ public class OceanSimulation : Singleton<OceanSimulation>
         {
             sineWaves[i].direction = waves[i].direction.normalized;
             sineWaves[i].frequency = 2f / waves[i].waveLength;
-            sineWaves[i].amplitude = waves[i].amplitude;
+            sineWaves[i].amplitude = waves[i].amplitude / (1f - .135335f);
             sineWaves[i].phase = waves[i].speed * sineWaves[i].frequency;
         }
 
         //Generate additional mathematical Waves as noise
-        float freq = 2f / waves[0].waveLength;
-        float amp = waves[0].amplitude;
+        float freq = sineWaves[0].frequency;
+        float amp = sineWaves[0].amplitude;
         for (int i = waves.Length; i < waveCount; i++)
         {
             freq *= 1.18f;
@@ -35,8 +38,10 @@ public class OceanSimulation : Singleton<OceanSimulation>
             sineWaves[i].direction = Random.insideUnitCircle.normalized;
             sineWaves[i].frequency = freq;
             sineWaves[i].amplitude = amp;
-            sineWaves[i].phase = waves[0].speed * freq;
+            sineWaves[i].phase = sineWaves[i-1].phase * 1.037f;
         }
+
+        waveBuffer.SetData(sineWaves);
 
         foreach (var oceanMat in oceanMaterials)
             SetupOceanMaterial(oceanMat);
@@ -44,13 +49,8 @@ public class OceanSimulation : Singleton<OceanSimulation>
 
     public void SetupOceanMaterial(Material oceanMat)
     {
-        for (int i = 0; i < waveCount; i++)
-        {
-            oceanMat.SetVector("_OceanDirection_" + i, sineWaves[i].direction);
-            oceanMat.SetFloat("_OceanFrequency_" + i, sineWaves[i].frequency);
-            oceanMat.SetFloat("_OceanAmplitude_" + i, sineWaves[i].amplitude);
-            oceanMat.SetFloat("_OceanSpeed_" + i, sineWaves[i].phase);
-        }
+        oceanMat.SetFloat("_WaveCount", waveCount);
+        oceanMat.SetBuffer("_Waves", waveBuffer);
     }
 
     private void OnApplicationQuit()
@@ -64,8 +64,11 @@ public class OceanSimulation : Singleton<OceanSimulation>
     {
         float height = 0;
 
-        for(int i = 0; i < simulateCount; i++)
-            height += sineWaves[i].amplitude * Mathf.Sin(sineWaves[i].frequency * (sineWaves[i].direction.x * pos.x + sineWaves[i].direction.y * pos.z) + sineWaves[i].phase * Time.time);
+        for (int i = 0; i < simulateCount; i++)
+        {
+            float sine = Mathf.Sin(sineWaves[i].frequency * (sineWaves[i].direction.x * pos.x + sineWaves[i].direction.y * pos.z) + sineWaves[i].phase * Time.time);
+            height += sineWaves[i].amplitude * (Mathf.Exp(sine - 1) - .135335f);
+        }
         
         return height;
     }

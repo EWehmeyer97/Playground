@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ocean
-  m_Shader: {fileID: -6465566751694194690, guid: a1c3a6e19e243b143a92980d6681275d,
+  m_Shader: {fileID: -6465566751694194690, guid: f5b65eb048752eb4c894775f45e6a772,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -69,8 +69,8 @@ Material:
     - _CircleSpeed: -4
     - _FresnelPower: 3
     - _FresnelStrength: 1
-    - _NormalStrength: 0.479
-    - _OceanAmplitude_0: 0.25
+    - _NormalStrength: 0.162
+    - _OceanAmplitude_0: 0.8
     - _OceanAmplitude_1: 0.1
     - _OceanFrequency_0: 0.25
     - _OceanFrequency_1: 0.6666667
@@ -87,12 +87,13 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0.845
+    - _WaveCount: 32
     m_Colors:
     - _BaseColor: {r: 0.4967213, g: 0.73278683, b: 0.9, a: 1}
     - _BaseColor_1: {r: 0.36919448, g: 1.76099, b: 2.3960001, a: 1}
     - _CirclePos: {r: -4.51, g: -22.3, b: 0, a: 0}
     - _OceanDirection: {r: 4.16, g: 4.97, b: 0, a: 0}
-    - _OceanDirection_0: {r: 0.8320503, g: 0.5547002, b: 0, a: 0}
+    - _OceanDirection_0: {r: -0.8320503, g: 0.5547002, b: 0, a: 0}
     - _OceanDirection_1: {r: 0.9805807, g: -0.19611613, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
