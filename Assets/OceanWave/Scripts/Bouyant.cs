@@ -23,6 +23,17 @@ public class Bouyant : MonoBehaviour
         SetPoints();
     }
 
+    private void Start()
+    {
+        float averageHeight = 0f;
+        for (int i = 0; i < floatPoints.Length; i++)
+        {
+            Vector3 pos = transform.TransformPoint(floatPoints[i]);
+            averageHeight += OceanSimulation.Instance.GetWaterHeight(pos) - pos.y;
+        }
+        rb.MovePosition(rb.position + Vector3.up * averageHeight / floatPoints.Length);
+    }
+
     void FixedUpdate()
     {
         for (int i = 0; i < floatPoints.Length; i++)

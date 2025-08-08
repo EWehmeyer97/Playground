@@ -14,8 +14,9 @@ public class OceanSimulation : Singleton<OceanSimulation>
     private SineWave[] sineWaves;
     private ComputeBuffer waveBuffer;
 
-    void Start()
+    public override void Awake()
     {
+        base.Awake();
         waveBuffer = new ComputeBuffer(waveCount, 20); //Byte size of Wave Struct
 
         CreateWaves();
