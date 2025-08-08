@@ -20,13 +20,14 @@ public class Engine : MonoBehaviour
         Vector3 pos = GetEnginePosition();
         float cover = OceanSimulation.Instance.GetWaterHeight(pos);
         
-        rb.AddForce(transform.forward * force * (cover - pos.y > 0f ? 1f : 0.5f));
+        rb.AddForce(transform.forward * force * (cover - pos.y > 0f ? 1f : 0f));
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(GetEnginePosition(), 0.1f);
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawWireSphere(location, 0.1f);
     }
 
     public Vector3 GetEnginePosition()

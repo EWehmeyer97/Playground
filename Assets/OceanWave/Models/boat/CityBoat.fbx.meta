@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5f59b360194c5f04f9926d41597e956b
+guid: ce8f672dec921d7409fbe46a00a7478a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,13 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: chb_02engine_b_png
-    second: {fileID: 2100000, guid: 855222a0e1e2e184ca9c75f478df404e, type: 2}
+      name: PanelFlame
+    second: {fileID: 2100000, guid: ea1fe60a4a66a7b4797dde8cd522a659, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: chb_21steering_r_png
-    second: {fileID: 2100000, guid: ebf75110136877741bf797eaa6d488aa, type: 2}
+      name: ef_dashboard
+    second: {fileID: 2100000, guid: 26ee7af5a89d1e044a5c6e03aa44149e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_Boat
+    second: {fileID: 2100000, guid: 418b416b03ca4e142b33a88e107b53d3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -26,8 +31,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -45,7 +48,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.2
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -100,7 +103,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.002
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

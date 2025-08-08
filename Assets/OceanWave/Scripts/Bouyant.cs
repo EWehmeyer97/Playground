@@ -18,6 +18,7 @@ public class Bouyant : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
 
         SetPoints();
     }

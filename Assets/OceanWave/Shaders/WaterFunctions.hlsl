@@ -13,13 +13,18 @@ void OceanWaves_float(float xPos, float zPos, int count, out float yPos, out flo
 	dx = 0;
 	dz = 0;
 
-	for(int wi = 0; wi < count; wi++){
+	for(int wi = 0; wi < count; wi++)
+	{
+		//Combine Directional Data
 		float xz = xPos * _Waves[wi].direction.x + zPos * _Waves[wi].direction.y;
+
+		//Run Calculation
 		float n = _Waves[wi].frequency * xz + _Waves[wi].speed * _Time.y;
 		float result = _Waves[wi].amplitude * (exp(sin(n) - 1) - .135335);
 
 		yPos += result;
 
+		//Run Derivative Equation
 		float derivative = _Waves[wi].frequency * cos(n) * result;
 		dx += _Waves[wi].direction.x * derivative;
 		dz += _Waves[wi].direction.y * derivative;

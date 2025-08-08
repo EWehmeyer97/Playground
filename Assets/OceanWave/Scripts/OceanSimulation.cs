@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,8 +18,17 @@ public class OceanSimulation : Singleton<OceanSimulation>
     {
         waveBuffer = new ComputeBuffer(waveCount, 20); //Byte size of Wave Struct
 
-        sineWaves = new SineWave[waveCount];
+        CreateWaves();
 
+        waveBuffer.SetData(sineWaves);
+
+        foreach (var oceanMat in oceanMaterials)
+            SetupOceanMaterial(oceanMat);
+    }
+
+    private void CreateWaves()
+    {
+        sineWaves = new SineWave[waveCount];
         //Change Ocean Waves into mathematical waves
         for (int i = 0; i < waves.Length; i++)
         {
@@ -35,16 +45,11 @@ public class OceanSimulation : Singleton<OceanSimulation>
         {
             freq *= 1.18f;
             amp *= 0.82f;
-            sineWaves[i].direction = Random.insideUnitCircle.normalized;
+            sineWaves[i].direction = UnityEngine.Random.insideUnitCircle.normalized;
             sineWaves[i].frequency = freq;
             sineWaves[i].amplitude = amp;
-            sineWaves[i].phase = sineWaves[i-1].phase * 1.037f;
+            sineWaves[i].phase = sineWaves[i - 1].phase * 1.037f;
         }
-
-        waveBuffer.SetData(sineWaves);
-
-        foreach (var oceanMat in oceanMaterials)
-            SetupOceanMaterial(oceanMat);
     }
 
     public void SetupOceanMaterial(Material oceanMat)
